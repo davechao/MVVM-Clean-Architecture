@@ -56,9 +56,10 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiService(moshi: Moshi, okHttpClient: OkHttpClient): ApiService {
+    fun provideApiService(gson: Gson, okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .baseUrl(Constant.API_HOST_URL)
             .build()
