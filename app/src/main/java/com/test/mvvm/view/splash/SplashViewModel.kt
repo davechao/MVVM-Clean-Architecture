@@ -2,7 +2,6 @@ package com.test.mvvm.view.splash
 
 import android.app.Application
 import com.test.mvvm.R
-import com.test.mvvm.model.api.ApiRepository
 import com.test.mvvm.view.base.BaseViewModel
 import javax.inject.Inject
 
