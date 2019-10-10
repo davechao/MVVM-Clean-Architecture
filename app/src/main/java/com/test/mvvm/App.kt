@@ -21,6 +21,10 @@ class App : Application(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+    init {
+        self = this
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -32,7 +36,6 @@ class App : Application(), HasAndroidInjector {
             .application(this)
             .build()
             .inject(this)
-
 
         RxJavaPlugins.setErrorHandler {
             val errMsg = "### RxJavaPlugins get error: ${it.message}"
