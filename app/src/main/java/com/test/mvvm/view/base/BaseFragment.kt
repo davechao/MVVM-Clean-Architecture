@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.test.mvvm.view.main.MainViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : CustomDaggerFragment() {
@@ -39,7 +38,6 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : CustomDagg
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Timber.i("onCreateView")
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         binding.lifecycleOwner = this
         return binding.root
