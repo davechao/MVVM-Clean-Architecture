@@ -96,9 +96,6 @@ dependencies {
     // Lifecycle, ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$ktx_extensions"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$ktx_extensions"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$ktx_extensions"
 
     // KTX Extensions
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$ktx_extensions_version"
