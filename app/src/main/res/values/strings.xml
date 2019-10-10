@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MVVM App</string>
+
+    <string name="version">v</string>
+    <string name="home">首頁</string>
+    <string name="personal">個人</string>
+
+</resources>
