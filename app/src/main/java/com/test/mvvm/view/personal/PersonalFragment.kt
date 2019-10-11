@@ -14,6 +14,8 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getUsers()
     }
 
     override fun getLayoutId(): Int {

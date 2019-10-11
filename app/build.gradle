@@ -35,18 +35,15 @@ android {
 
     productFlavors {
         dev {
-            buildConfigField "String", "API_HOST", '"http://dev-gam-api.silkrode.com.tw/"'
-            buildConfigField "String", "WEB_SOCKET_HOST", '"ws://dev-gam-api.silkrode.com.tw/topics/device?token="'
+            buildConfigField "String", "API_HOST", '"https://api.github.com"'
         }
 
         sit {
             buildConfigField "String", "API_HOST", '"http://dev-gam-api.silkrode.com.tw/"'
-            buildConfigField "String", "WEB_SOCKET_HOST", '"ws://dev-gam-api.silkrode.com.tw/topics/device?token="'
         }
 
         prod {
             buildConfigField "String", "API_HOST", '"http://dev-gam-api.silkrode.com.tw/"'
-            buildConfigField "String", "WEB_SOCKET_HOST", '"ws://dev-gam-api.silkrode.com.tw/topics/device?token="'
         }
     }
 

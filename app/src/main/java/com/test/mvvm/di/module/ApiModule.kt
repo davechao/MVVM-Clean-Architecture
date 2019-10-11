@@ -59,7 +59,7 @@ class ApiModule {
     fun provideApiService(gson: Gson, okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .baseUrl(Constant.API_HOST_URL)
             .build()

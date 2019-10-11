@@ -28,7 +28,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.bottomNavigation.setOnNavigationItemReselectedListener {
             if (Navigation.findNavController(
                     this,
-                    R.id.nav_host_fragment).currentDestination?.id == R.id.splashFragment) {
+                    R.id.nav_host_fragment
+                ).currentDestination?.id == R.id.splashFragment
+            ) {
                 Navigation.findNavController(this, R.id.nav_host_fragment)
                     .navigate(R.id.action_bottom_nav_to_homeFragment)
             }
