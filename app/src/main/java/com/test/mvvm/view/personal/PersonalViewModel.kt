@@ -1,8 +1,10 @@
 package com.test.mvvm.view.personal
 
 import android.app.Application
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.test.mvvm.model.api.ApiRepository
+import com.test.mvvm.model.api.bean.UserDetailItem
 import com.test.mvvm.view.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,14 +19,18 @@ class PersonalViewModel @Inject constructor(
 
     private val applicationContext = app.applicationContext
 
-    fun getUsers() {
+    val userDetailData = MutableLiveData<UserDetailItem>()
+
+    fun getUserDetail(login: String) {
         viewModelScope.launch {
             try {
-                val userItemList = withContext(Dispatchers.IO) {
-                    apiRepository.fetchUsers()
+                isShowProgress.value = true
+                val userDetailItem = withContext(Dispatchers.IO) {
+                    apiRepository.fetchUserDetail(login)
                 }
 
-                Timber.d("Data: ${userItemList.size}")
+                isShowProgress.value = false
+                userDetailData.value = userDetailItem
 
             } catch (e: Exception) {
                 e.printStackTrace()

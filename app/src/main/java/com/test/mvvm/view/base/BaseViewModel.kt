@@ -12,6 +12,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     val toastData = MutableLiveData<String>()
     val dialogData = MutableLiveData<String>()
     val navigateView = MutableLiveData<Int>()
+    val isShowProgress = MutableLiveData<Boolean>().also { it.value = false }
 
     override fun onCleared() {
         compositeDisposable.clear()
