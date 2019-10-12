@@ -21,19 +21,21 @@ class PersonalViewModel @Inject constructor(
 
     val userDetailData = MutableLiveData<UserDetailItem>()
 
-    fun getUserDetail(login: String) {
+    fun getUserDetail(username: String) {
         viewModelScope.launch {
             try {
                 isLoading.value = true
+
                 val userDetailItem = withContext(Dispatchers.IO) {
-                    apiRepository.fetchUserDetail(login)
+                    apiRepository.fetchUserDetail(username)
                 }
 
-                isLoading.value = false
                 userDetailData.value = userDetailItem
 
             } catch (e: Exception) {
                 e.printStackTrace()
+            } finally {
+                isLoading.value = false
             }
         }
     }

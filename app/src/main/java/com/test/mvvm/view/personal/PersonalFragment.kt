@@ -3,12 +3,18 @@ package com.test.mvvm.view.personal
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentPersonalBinding
 import com.test.mvvm.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_personal.*
+import kotlinx.android.synthetic.main.view_user_detail_blog.*
 
 class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>() {
+
+    companion object {
+        const val USER_NAME_DAVE = "davechao"
+    }
 
     override fun setViewModelToBinding(binding: FragmentPersonalBinding) {
         binding.viewModel = viewModel
@@ -26,10 +32,19 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
         })
 
         viewModel.userDetailData.observe(this, Observer {
-            nameTextView.text = it.name
+            Glide.with(requireContext())
+                .load(it.avatarUrl)
+                .placeholder(R.color.colorUserAvatarPlaceHolderColor)
+                .into(binding.imageUserPic)
+
+            text_login.text = it.login
+            text_bio.text = it.bio
+            binding.viewUserDetailInfo.setData(login = it.login, isSiteAdmin = it.isSiteAdmin)
+            binding.viewUserDetailLoc.setData(it.location)
+            binding.viewUserDetailBlog.setData(it.blog)
         })
 
-        viewModel.getUserDetail("davechao")
+        viewModel.getUserDetail(USER_NAME_DAVE)
     }
 
     override fun getLayoutId(): Int {

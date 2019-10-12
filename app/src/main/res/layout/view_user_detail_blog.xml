@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_vertical_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_vertical_margin" />
+
+    <ImageView
+        android:id="@+id/image_blog"
+        style="@style/UserDetailImageStyle"
+        android:src="@drawable/ic_baseline_link_24px"
+        app:layout_constraintBottom_toBottomOf="@id/guide_line_bottom"
+        app:layout_constraintStart_toStartOf="@id/guide_line_left"
+        app:layout_constraintTop_toTopOf="@id/guide_line_top" />
+
+    <TextView
+        android:id="@+id/text_blog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/view_user_info_pic_text_margin"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:textColorLink="@color/colorUserDetailLink"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_blog"
+        app:layout_constraintLeft_toRightOf="@id/image_blog"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_blog"
+        tools:text="http://chriswansrath.com/dddddddddd" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

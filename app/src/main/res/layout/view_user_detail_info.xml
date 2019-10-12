@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_vertical_margin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_horizontal_margin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_horizontal_margin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_vertical_margin"/>
+
+    <ImageView
+        android:id="@+id/image_user_pic"
+        style="@style/UserDetailImageStyle"
+        android:src="@drawable/ic_baseline_person_24px"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_line_left"
+        app:layout_constraintTop_toTopOf="@id/guide_line_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_line_bottom"/>
+
+    <TextView
+        android:id="@+id/text_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:ellipsize="end"
+        android:textSize="18sp"
+        android:textColor="@color/colorLoginText"
+        android:layout_marginStart="@dimen/view_user_info_pic_text_margin"
+        app:layout_constraintLeft_toRightOf="@id/image_user_pic"
+        app:layout_constraintTop_toTopOf="@id/image_user_pic"
+        app:layout_constraintBottom_toTopOf="@id/text_badge"
+        tools:text="defunkt"/>
+
+    <TextView
+        android:id="@+id/text_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="@style/UserInfoBadgeStyle"
+        app:layout_constraintLeft_toLeftOf="@id/text_login"
+        app:layout_constraintTop_toBottomOf="@id/text_login"
+        app:layout_constraintBottom_toBottomOf="@id/image_user_pic"
+        android:text="@string/user_info_badge_staff"
+        tools:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

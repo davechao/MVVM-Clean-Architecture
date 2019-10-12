@@ -30,7 +30,6 @@ class UserDataSource constructor(
                 }
 
                 if (response.isSuccessful) {
-                    pagingCallback.onLoaded()
                     response.body()?.run {
                         val nextPageUrl =
                             ResponseUtil.INSTANCE.parseNextPageUrl(
@@ -41,6 +40,8 @@ class UserDataSource constructor(
                 }
             } catch (e: Throwable) {
                 pagingCallback.onThrowable(e)
+            } finally {
+                pagingCallback.onLoaded()
             }
         }
     }

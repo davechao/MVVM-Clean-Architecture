@@ -11,45 +11,100 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorUserDetailBackground"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/avatarImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="75dp"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="15dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_user_pic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_round_account_circle_24px"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/nameTextView"
+            android:id="@+id/text_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="24dp"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatarImageView"
-            tools:text="Chris Wanstrath" />
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxWidth="250dp"
+            android:maxLines="1"
+            android:text=""
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_user_pic"
+            tools:text="Dave Chao" />
 
         <TextView
-            android:id="@+id/bioTextView"
+            android:id="@+id/text_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lineSpacingExtra="0sp"
+            android:maxWidth="200dp"
+            android:maxLines="1"
+            android:text="18sp"
             android:textSize="14sp"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-            tools:text="bio" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_login"
+            tools:text="Software Engineer" />
+
+        <View
+            android:id="@+id/view_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorSeparator"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_bio" />
+
+        <com.test.mvvm.view.personal.view.UserDetailInfoView
+            android:id="@+id/view_user_detail_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_separator" />
+
+        <com.test.mvvm.view.personal.view.UserDetailLocationView
+            android:id="@+id/view_user_detail_loc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_user_detail_info" />
+
+        <com.test.mvvm.view.personal.view.UserDetailBlogView
+            android:id="@+id/view_user_detail_blog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_user_detail_loc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

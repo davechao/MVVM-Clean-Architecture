@@ -20,7 +20,9 @@ enum class ResponseUtil {
         headers?.run {
             val links = headers.split(SEPARATOR_LINKS)
             for (link in links) {
-                val segments = link.split(SEPARATOR_LINK_PARAM.toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val segments =
+                    link.split(SEPARATOR_LINK_PARAM.toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
                 if (segments.size < 2)
                     continue
 
@@ -31,7 +33,8 @@ enum class ResponseUtil {
                 linkPart = linkPart.substring(1, linkPart.length - 1)
 
                 for (i in 1 until segments.size) {
-                    val rel = segments[i].trim { it <= ' ' }.split("=".toRegex()).dropLastWhile { it.isEmpty() }
+                    val rel = segments[i].trim { it <= ' ' }.split("=".toRegex())
+                        .dropLastWhile { it.isEmpty() }
                         .toTypedArray() //$NON-NLS-1$
                     if (rel.size < 2 || META_REL != rel[0])
                         continue

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_vertical_margin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_horizontal_margin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_horizontal_margin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_vertical_margin"/>
+
+    <ImageView
+        android:id="@+id/image_location"
+        style="@style/UserDetailImageStyle"
+        android:src="@drawable/ic_baseline_location_on_24px"
+        app:layout_constraintTop_toTopOf="@+id/guide_line_top"
+        app:layout_constraintBottom_toBottomOf="@+id/guide_line_bottom"
+        app:layout_constraintStart_toStartOf="@id/guide_line_left"/>
+
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="@dimen/view_user_info_pic_text_margin"
+        android:textColor="@color/colorUserDetailTextColor"
+        app:layout_constraintTop_toTopOf="@+id/image_location"
+        app:layout_constraintBottom_toBottomOf="@+id/image_location"
+        app:layout_constraintStart_toEndOf="@id/image_location"
+        tools:text="San Francisco"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
