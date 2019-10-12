@@ -1,7 +1,6 @@
 package com.test.mvvm.di.module
 
 import com.google.gson.Gson
-import com.squareup.moshi.Moshi
 import com.test.mvvm.BuildConfig
 import com.test.mvvm.Constant
 import com.test.mvvm.model.api.ApiRepository
@@ -13,9 +12,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -59,7 +56,6 @@ class ApiModule {
     fun provideApiService(gson: Gson, okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .baseUrl(Constant.API_HOST_URL)
             .build()
@@ -68,7 +64,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiRepository(apiService: ApiService, gson: Gson): ApiRepository {
-        return ApiRepository(apiService, gson)
+    fun provideApiRepository(apiService: ApiService): ApiRepository {
+        return ApiRepository(apiService)
     }
 }

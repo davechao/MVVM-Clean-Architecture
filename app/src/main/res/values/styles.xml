@@ -8,4 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- User info badge -->
+    <style name="UserInfoBadgeStyle">
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorBadgeText</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/bg_item_user_info_badge</item>
+    </style>
+
+    <!-- User detail view -->
+    <style name="UserDetailImageStyle">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+
 </resources>

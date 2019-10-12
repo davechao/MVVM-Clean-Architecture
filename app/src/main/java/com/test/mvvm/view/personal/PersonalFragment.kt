@@ -17,7 +17,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.isShowProgress.observe(this, Observer {
+        viewModel.isLoading.observe(this, Observer {
             if (it) {
                 progressHUD?.show()
             } else {

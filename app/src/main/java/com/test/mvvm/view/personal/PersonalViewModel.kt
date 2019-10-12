@@ -24,12 +24,12 @@ class PersonalViewModel @Inject constructor(
     fun getUserDetail(login: String) {
         viewModelScope.launch {
             try {
-                isShowProgress.value = true
+                isLoading.value = true
                 val userDetailItem = withContext(Dispatchers.IO) {
                     apiRepository.fetchUserDetail(login)
                 }
 
-                isShowProgress.value = false
+                isLoading.value = false
                 userDetailData.value = userDetailItem
 
             } catch (e: Exception) {

@@ -1,13 +1,10 @@
 package com.test.mvvm.model.api
 
-import com.google.gson.Gson
 import com.test.mvvm.model.api.bean.UserDetailItem
 import com.test.mvvm.model.api.bean.UserItem
+import retrofit2.Response
 
-class ApiRepository(
-    private val apiService: ApiService,
-    private val gson: Gson
-) {
+class ApiRepository(private val apiService: ApiService) {
 
     companion object {
         const val X_APP_VERSION = "x-app-version"
@@ -15,8 +12,12 @@ class ApiRepository(
         const val AUTHORIZATION = "Authorization"
     }
 
-    suspend fun fetchUsers(): ArrayList<UserItem> {
-        return apiService.fetchUsers()
+    suspend fun fetchUsers(since: Int, perPage: Int): Response<ArrayList<UserItem>> {
+        return apiService.fetchUsers(since, perPage)
+    }
+
+    suspend fun fetchUsers(url: String): Response<ArrayList<UserItem>> {
+        return apiService.fetchUsers(url)
     }
 
     suspend fun fetchUserDetail(login: String): UserDetailItem {

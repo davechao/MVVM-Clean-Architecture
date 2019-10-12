@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">MVVM App</string>
+    <string name="app_name">Github User Info</string>
 
-    <string name="version">v</string>
     <string name="home">首頁</string>
     <string name="personal">個人</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="user_info_badge_staff">STAFF</string>
+    <string name="user_info_users">Users</string>
 
 </resources>

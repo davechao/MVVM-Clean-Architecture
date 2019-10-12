@@ -7,4 +7,20 @@
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
 
+    <!-- item of user info list -->
+    <color name="colorLoginText">#1f1f1f</color>
+    <color name="colorBadgeText">#ffffff</color>
+    <color name="colorBadgeBackground">#3971D5</color>
+    <color name="colorAvatarPlaceHolder">#7f7f7f</color>
+
+    <!-- main page -->
+    <color name="colorSeparator">#e0e0e0</color>
+
+    <!--user detail-->
+    <color name="colorUserDetailLink">#5e97e1</color>
+    <color name="colorUserDetailBackground">#ffffff</color>
+    <color name="colorUserDetailTextColor">#1f1f1f</color>
+    <color name="colorUserDetailImageColor">#7f7f7f</color>
+    <color name="colorUserAvatarPlaceHolderColor">#7f7f7f</color>
+
 </resources>

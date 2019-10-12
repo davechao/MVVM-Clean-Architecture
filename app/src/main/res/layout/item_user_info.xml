@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorUserDetailBackground">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/item_user_info_margin_start"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="30dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="15dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="15dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_user"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_round_account_circle_24px"
+        app:layout_constraintTop_toTopOf="@id/guide_line_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_line_bottom"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_line_left"/>
+
+    <TextView
+        android:id="@+id/text_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:maxWidth="200dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="20sp"
+        android:textColor="@color/colorLoginText"
+        app:layout_constraintTop_toTopOf="@id/image_user"
+        app:layout_constraintStart_toEndOf="@id/image_user"
+        app:layout_constraintBottom_toTopOf="@id/text_badge"
+        tools:text="wobojo"/>
+
+    <TextView
+        android:id="@+id/text_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/user_info_badge_staff"
+        style="@style/UserInfoBadgeStyle"
+        app:layout_constraintTop_toBottomOf="@id/text_login"
+        app:layout_constraintStart_toStartOf="@id/text_login"
+        app:layout_constraintBottom_toBottomOf="@id/image_user"
+        tools:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

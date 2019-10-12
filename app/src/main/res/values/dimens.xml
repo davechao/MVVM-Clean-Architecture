@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="view_user_info_guide_line_horizontal_margin">14dp</dimen>
+    <dimen name="view_user_info_guide_line_vertical_margin">12dp</dimen>
+    <dimen name="view_user_info_pic_text_margin">20dp</dimen>
+    <dimen name="item_user_info_margin_start">12dp</dimen>
+
+</resources>

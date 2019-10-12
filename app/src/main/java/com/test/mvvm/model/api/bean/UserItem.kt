@@ -56,6 +56,6 @@ data class UserItem(
     val type: String = "",
 
     @SerializedName("site_admin")
-    val siteAdmin: Boolean = false
+    val isSiteAdmin: Boolean = false
 
 )
