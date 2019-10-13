@@ -130,6 +130,9 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.paging:paging-rxjava2:$paging_version"
 
+    // LiveEventBus
+    implementation "com.jeremyliao:live-event-bus-x:$live_event_bus_version"
+
     // Material Dialogs
     implementation "com.afollestad.material-dialogs:core:$material_dialogs_version"
     implementation "com.afollestad.material-dialogs:lifecycle:$material_dialogs_version"

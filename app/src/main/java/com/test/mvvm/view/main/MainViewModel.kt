@@ -14,5 +14,4 @@ class MainViewModel @Inject constructor(
 
     val bottomNavigationVisibility = MutableLiveData<Int>().also { it.value = View.VISIBLE }
 
-
 }

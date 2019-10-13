@@ -9,7 +9,6 @@ import com.test.mvvm.view.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 class PersonalViewModel @Inject constructor(

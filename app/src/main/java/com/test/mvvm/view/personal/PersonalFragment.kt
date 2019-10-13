@@ -8,7 +8,6 @@ import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentPersonalBinding
 import com.test.mvvm.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_personal.*
-import kotlinx.android.synthetic.main.view_user_detail_blog.*
 
 class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>() {
 
