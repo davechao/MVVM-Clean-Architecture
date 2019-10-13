@@ -1,21 +1,24 @@
 package com.test.mvvm.model.pref
 
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import com.test.mvvm.model.pref.bean.TokenData
 
-class Pref(private val gson: Gson, preferenceFileName: String) : AbstractPref(preferenceFileName) {
+class Pref(private val moshi: Moshi, preferenceFileName: String) :
+    AbstractPref(preferenceFileName) {
 
     private val tokenPref = StringPref("TOKEN")
 
     var token: TokenData
         get() =
             try {
-                gson.fromJson(tokenPref.get(), TokenData::class.java)
+                val jsonAdapter = moshi.adapter(TokenData::class.java)
+                jsonAdapter.fromJson(tokenPref.get().toString())!!
             } catch (e: Exception) {
                 TokenData()
             }
         set(value) {
-            tokenPref.set(gson.toJson(value))
+            val jsonAdapter = moshi.adapter(TokenData::class.java)
+            tokenPref.set(jsonAdapter.toJson(value))
         }
 
     fun clearToken() {

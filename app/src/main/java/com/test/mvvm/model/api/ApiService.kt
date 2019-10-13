@@ -14,10 +14,10 @@ interface ApiService {
     suspend fun fetchUsers(
         @Query("since") since: Int,
         @Query("per_page") perPage: Int
-    ): Response<ArrayList<UserItem>>
+    ): Response<List<UserItem>>
 
     @GET
-    suspend fun fetchUsers(@Url url: String): Response<ArrayList<UserItem>>
+    suspend fun fetchUsers(@Url url: String): Response<List<UserItem>>
 
     @GET("/users/{username}")
     suspend fun fetchUserDetail(@Path("username") username: String): UserDetailItem

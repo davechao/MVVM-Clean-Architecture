@@ -48,7 +48,7 @@ class UserInfoListAdapter : PagedListAdapter<UserItem, UserInfoViewHolder>(diffC
             }
 
             // user badge
-            if (it!!.isSiteAdmin) {
+            if (it!!.isSiteAdmin!!) {
                 holder.badgeTextView.visibility = View.VISIBLE
             } else {
                 holder.badgeTextView.visibility = View.GONE

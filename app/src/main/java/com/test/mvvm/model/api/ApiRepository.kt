@@ -12,11 +12,11 @@ class ApiRepository(private val apiService: ApiService) {
         const val AUTHORIZATION = "Authorization"
     }
 
-    suspend fun fetchUsers(since: Int, perPage: Int): Response<ArrayList<UserItem>> {
+    suspend fun fetchUsers(since: Int, perPage: Int): Response<List<UserItem>> {
         return apiService.fetchUsers(since, perPage)
     }
 
-    suspend fun fetchUsers(url: String): Response<ArrayList<UserItem>> {
+    suspend fun fetchUsers(url: String): Response<List<UserItem>> {
         return apiService.fetchUsers(url)
     }
 

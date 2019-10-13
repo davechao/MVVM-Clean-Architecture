@@ -1,61 +1,63 @@
 package com.test.mvvm.model.api.bean
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class UserItem(
 
-    @SerializedName("login")
-    val login: String = "",
+    @Json(name = "login")
+    val login: String?,
 
-    @SerializedName("id")
-    val id: Long = 0,
+    @Json(name = "id")
+    val id: Long?,
 
-    @SerializedName("node_id")
-    val nodeId: String = "",
+    @Json(name = "node_id")
+    val nodeId: String?,
 
-    @SerializedName("avatar_url")
-    val avatarUrl: String = "",
+    @Json(name = "avatar_url")
+    val avatarUrl: String?,
 
-    @SerializedName("gravatar_id")
-    val gravatarId: String = "",
+    @Json(name = "gravatar_id")
+    val gravatarId: String?,
 
-    @SerializedName("url")
-    val url: String = "",
+    @Json(name = "url")
+    val url: String?,
 
-    @SerializedName("html_url")
-    val htmlUrl: String = "",
+    @Json(name = "html_url")
+    val htmlUrl: String?,
 
-    @SerializedName("followers_url")
-    val followersUrl: String = "",
+    @Json(name = "followers_url")
+    val followersUrl: String?,
 
-    @SerializedName("following_url")
-    val followingUrl: String = "",
+    @Json(name = "following_url")
+    val followingUrl: String?,
 
-    @SerializedName("gists_url")
-    val gistsUrl: String = "",
+    @Json(name = "gists_url")
+    val gistsUrl: String?,
 
-    @SerializedName("starred_url")
-    val starredUrl: String = "",
+    @Json(name = "starred_url")
+    val starredUrl: String?,
 
-    @SerializedName("subscriptions_url")
-    val subscriptionsUrl: String = "",
+    @Json(name = "subscriptions_url")
+    val subscriptionsUrl: String?,
 
-    @SerializedName("organizations_url")
-    val organizationsUrl: String = "",
+    @Json(name = "organizations_url")
+    val organizationsUrl: String?,
 
-    @SerializedName("repos_url")
-    val reposUrl: String = "",
+    @Json(name = "repos_url")
+    val reposUrl: String?,
 
-    @SerializedName("events_url")
-    val eventsUrl: String = "",
+    @Json(name = "events_url")
+    val eventsUrl: String?,
 
-    @SerializedName("received_events_url")
-    val receivedEventsUrl: String = "",
+    @Json(name = "received_events_url")
+    val receivedEventsUrl: String?,
 
-    @SerializedName("type")
-    val type: String = "",
+    @Json(name = "type")
+    val type: String?,
 
-    @SerializedName("site_admin")
-    val isSiteAdmin: Boolean = false
+    @Json(name = "site_admin")
+    val isSiteAdmin: Boolean?
 
 )

@@ -1,7 +1,7 @@
 package com.test.mvvm.di.module
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.test.mvvm.Constant
 import com.test.mvvm.model.pref.Pref
 import dagger.Module
@@ -13,13 +13,15 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return GsonBuilder().create()
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
     }
 
     @Provides
     @Singleton
-    fun providePref(gson: Gson): Pref {
-        return Pref(gson, Constant.PREFS_NAME)
+    fun providePref(moshi: Moshi): Pref {
+        return Pref(moshi, Constant.PREFS_NAME)
     }
 }

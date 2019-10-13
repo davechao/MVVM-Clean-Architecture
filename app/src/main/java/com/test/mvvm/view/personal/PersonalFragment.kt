@@ -39,7 +39,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
             text_login.text = it.login
             text_bio.text = it.bio
-            binding.viewUserDetailInfo.setData(login = it.login, isSiteAdmin = it.isSiteAdmin)
+            binding.viewUserDetailInfo.setData(login = it.login, isSiteAdmin = it.isSiteAdmin!!)
             binding.viewUserDetailLoc.setData(it.location)
             binding.viewUserDetailBlog.setData(it.blog)
         })
