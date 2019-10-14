@@ -1,6 +1,5 @@
 package com.test.mvvm.view.home
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
@@ -11,15 +10,12 @@ import com.test.mvvm.view.adapter.paging.PagingCallback
 import com.test.mvvm.view.adapter.paging.UserDataSource
 import com.test.mvvm.view.adapter.paging.UserFactory
 import com.test.mvvm.view.base.BaseViewModel
+import org.koin.core.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(
-    app: Application,
-    private val apiRepository: ApiRepository
-) : BaseViewModel(app) {
+class HomeViewModel : BaseViewModel() {
 
-    private val applicationContext = app.applicationContext
+    private val apiRepository: ApiRepository by inject()
 
     fun getUsers(): LiveData<PagedList<UserItem>> {
         val userDataSource = UserDataSource(viewModelScope, apiRepository, callback)

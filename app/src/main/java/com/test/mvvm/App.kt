@@ -1,15 +1,16 @@
 package com.test.mvvm
 
 import android.app.Application
-import com.test.mvvm.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import io.reactivex.plugins.RxJavaPlugins
+import com.test.mvvm.di.apiModule
+import com.test.mvvm.di.appModule
+import com.test.mvvm.di.dbModule
+import com.test.mvvm.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import timber.log.Timber
-import javax.inject.Inject
 
-class App : Application(), HasAndroidInjector {
+class App : Application() {
 
     companion object {
         lateinit var self: Application
@@ -18,30 +19,27 @@ class App : Application(), HasAndroidInjector {
         }
     }
 
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
     init {
         self = this
     }
 
     override fun onCreate() {
         super.onCreate()
-
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
 
-        DaggerAppComponent.builder()
-            .application(this)
-            .build()
-            .inject(this)
+        val module = listOf(
+            appModule,
+            apiModule,
+            dbModule,
+            viewModelModule
+        )
 
-        RxJavaPlugins.setErrorHandler {
-            val errMsg = "### RxJavaPlugins get error: ${it.message}"
-            Timber.e(errMsg)
+        startKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(module)
         }
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

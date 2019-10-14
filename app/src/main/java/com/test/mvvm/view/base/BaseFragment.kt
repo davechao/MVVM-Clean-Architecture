@@ -6,19 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.kaopiz.kprogresshud.KProgressHUD
 import com.test.mvvm.view.main.MainViewModel
-import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : CustomDaggerFragment() {
+abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var binding: B
-    lateinit var viewModel: V
 
     abstract fun setViewModelToBinding(binding: B)
 
@@ -27,7 +22,6 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : CustomDagg
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass()!!)
         activity?.let {
             mainViewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
         }
@@ -50,11 +44,5 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : CustomDagg
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
     }
 
-    fun getViewModel(): ViewModel {
-        return ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass()!!)
-    }
-
     abstract fun getLayoutId(): Int
-
-    abstract fun getViewModelClass(): Class<V>?
 }

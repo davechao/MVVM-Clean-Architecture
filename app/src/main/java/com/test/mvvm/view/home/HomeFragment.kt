@@ -9,8 +9,11 @@ import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentHomeBinding
 import com.test.mvvm.view.adapter.UserInfoListAdapter
 import com.test.mvvm.view.base.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
+    private val viewModel by viewModel<HomeViewModel>()
 
     override fun setViewModelToBinding(binding: FragmentHomeBinding) {
         binding.viewModel = viewModel
@@ -41,10 +44,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
-    }
-
-    override fun getViewModelClass(): Class<HomeViewModel>? {
-        return HomeViewModel::class.java
     }
 
     override fun onResume() {

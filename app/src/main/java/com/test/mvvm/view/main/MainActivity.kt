@@ -7,9 +7,12 @@ import androidx.navigation.Navigation
 import com.test.mvvm.R
 import com.test.mvvm.databinding.ActivityMainBinding
 import com.test.mvvm.view.base.BaseActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,4 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return R.layout.activity_main
     }
 
-    override fun getViewModelClass(): Class<MainViewModel>? {
-        return MainViewModel::class.java
-    }
 }

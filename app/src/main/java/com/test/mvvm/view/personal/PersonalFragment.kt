@@ -8,8 +8,11 @@ import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentPersonalBinding
 import com.test.mvvm.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_personal.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>() {
+class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
+
+    private val viewModel by viewModel<PersonalViewModel>()
 
     companion object {
         const val USER_NAME_DAVE = "davechao"
@@ -48,10 +51,6 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_personal
-    }
-
-    override fun getViewModelClass(): Class<PersonalViewModel>? {
-        return PersonalViewModel::class.java
     }
 
     override fun onResume() {

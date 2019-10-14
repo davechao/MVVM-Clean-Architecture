@@ -54,6 +54,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     kapt {
         correctErrorTypes = true
         arguments {
@@ -126,10 +130,17 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-    // Kodein-DI
-    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_di_version"
-    implementation "org.kodein.di:kodein-di-framework-android-core:$kodein_di_version"
-    implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_di_version"
+    // Koin
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
+    implementation "org.koin:koin-java:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-android-scope:$koin_version"
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "org.koin:koin-android-ext:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
 
     // Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
@@ -167,6 +178,7 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
     testImplementation "androidx.paging:paging-common:$paging_version"
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+    testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 }

@@ -8,12 +8,15 @@ import androidx.navigation.Navigation
 import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentSplashBinding
 import com.test.mvvm.view.base.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
+class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     companion object {
         private const val SPLASH_TIME_OUT = 3000L
     }
+
+    private val viewModel by viewModel<SplashViewModel>()
 
     override fun setViewModelToBinding(binding: FragmentSplashBinding) {
         binding.viewModel = viewModel
@@ -31,10 +34,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_splash
-    }
-
-    override fun getViewModelClass(): Class<SplashViewModel>? {
-        return SplashViewModel::class.java
     }
 
     override fun onResume() {
