@@ -21,6 +21,7 @@ buildscript {
     ext.okhttp_interceptor_version = '3.12.0'
     ext.retrofit_version = '2.6.0'
     ext.dagger_version = '2.24'
+    ext.kodein_di_version = '6.4.1'
     ext.moshi_version = '1.8.0'
     ext.glide_version = '4.10.0'
     ext.circle_image_view_version = '3.0.1'

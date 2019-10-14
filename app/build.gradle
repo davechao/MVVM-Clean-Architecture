@@ -126,6 +126,11 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    // Kodein-DI
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_di_version"
+    implementation "org.kodein.di:kodein-di-framework-android-core:$kodein_di_version"
+    implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_di_version"
+
     // Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.paging:paging-rxjava2:$paging_version"
