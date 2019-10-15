@@ -1,1 +1,9 @@
 # MVVM-Clean-Architecture
+- MVVM
+- Coroutines
+- Koin
+- Retrofit
+- LiveData
+- Navigation
+- Paging
+- Moshi
