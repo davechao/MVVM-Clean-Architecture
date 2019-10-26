@@ -25,7 +25,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.navigateView.observe(this, Observer {
+        viewModel.navigateView.observe(viewLifecycleOwner, Observer {
             Navigation.findNavController(view).navigate(it)
         })
 

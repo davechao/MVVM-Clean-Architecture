@@ -29,7 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             adapter = userInfoListAdapter
         }
 
-        viewModel.isLoading.observe(this, Observer {
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it) {
                 progressHUD?.show()
             } else {
@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         })
 
-        viewModel.getUsers().observe(this, Observer {
+        viewModel.getUsers().observe(viewLifecycleOwner, Observer {
             userInfoListAdapter.submitList(it)
         })
     }

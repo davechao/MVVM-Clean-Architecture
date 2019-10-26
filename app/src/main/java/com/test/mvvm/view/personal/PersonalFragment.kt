@@ -25,7 +25,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.isLoading.observe(this, Observer {
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
             if (it) {
                 progressHUD?.show()
             } else {
@@ -33,7 +33,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
             }
         })
 
-        viewModel.userDetailData.observe(this, Observer {
+        viewModel.userDetailData.observe(viewLifecycleOwner, Observer {
             Glide.with(requireContext())
                 .load(it.avatarUrl)
                 .placeholder(R.color.colorUserAvatarPlaceHolderColor)
