@@ -1,7 +1,7 @@
 package com.test.mvvm.model.pref
 
 import com.squareup.moshi.Moshi
-import com.test.mvvm.model.pref.bean.TokenData
+import com.test.mvvm.model.pref.vo.TokenData
 
 class Pref(private val moshi: Moshi, preferenceFileName: String) :
     AbstractPref(preferenceFileName) {

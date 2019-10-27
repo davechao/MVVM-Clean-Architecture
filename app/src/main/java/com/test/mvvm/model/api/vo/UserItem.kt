@@ -1,4 +1,4 @@
-package com.test.mvvm.model.api.bean
+package com.test.mvvm.model.api.vo
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

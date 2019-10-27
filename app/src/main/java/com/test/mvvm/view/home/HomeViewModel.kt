@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.test.mvvm.model.api.ApiRepository
-import com.test.mvvm.model.api.bean.UserItem
+import com.test.mvvm.model.api.vo.UserItem
 import com.test.mvvm.view.adapter.paging.PagingCallback
 import com.test.mvvm.view.adapter.paging.UserDataSource
 import com.test.mvvm.view.adapter.paging.UserFactory

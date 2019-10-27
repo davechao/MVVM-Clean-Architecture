@@ -1,4 +1,4 @@
-package com.test.mvvm.model.db.bean
+package com.test.mvvm.model.db.vo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

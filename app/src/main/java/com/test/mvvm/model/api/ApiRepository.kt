@@ -1,7 +1,7 @@
 package com.test.mvvm.model.api
 
-import com.test.mvvm.model.api.bean.UserDetailItem
-import com.test.mvvm.model.api.bean.UserItem
+import com.test.mvvm.model.api.vo.UserDetailItem
+import com.test.mvvm.model.api.vo.UserItem
 import retrofit2.Response
 
 class ApiRepository(private val apiService: ApiService) {

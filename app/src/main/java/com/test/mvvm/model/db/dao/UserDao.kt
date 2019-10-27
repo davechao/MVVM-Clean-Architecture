@@ -1,8 +1,6 @@
 package com.test.mvvm.model.db.dao
 
 import androidx.room.*
-import com.test.mvvm.model.db.bean.User
-import io.reactivex.Completable
 
 @Dao
 interface UserDao {

@@ -1,4 +1,4 @@
-package com.test.mvvm.model.pref.bean
+package com.test.mvvm.model.pref.vo
 
 data class TokenData(
     var accessToken: String? = null,

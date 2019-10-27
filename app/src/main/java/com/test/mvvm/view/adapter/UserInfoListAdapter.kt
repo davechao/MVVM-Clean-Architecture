@@ -7,7 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.test.mvvm.R
-import com.test.mvvm.model.api.bean.UserItem
+import com.test.mvvm.model.api.vo.UserItem
 import com.test.mvvm.view.adapter.viewholder.UserInfoViewHolder
 
 class UserInfoListAdapter : PagedListAdapter<UserItem, UserInfoViewHolder>(diffCallback) {

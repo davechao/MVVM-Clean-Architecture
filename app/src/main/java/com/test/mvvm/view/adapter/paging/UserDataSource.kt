@@ -3,7 +3,7 @@ package com.test.mvvm.view.adapter.paging
 import android.webkit.URLUtil
 import androidx.paging.PageKeyedDataSource
 import com.test.mvvm.model.api.ApiRepository
-import com.test.mvvm.model.api.bean.UserItem
+import com.test.mvvm.model.api.vo.UserItem
 import com.test.mvvm.utility.ResponseUtil
 import com.test.mvvm.utility.ResponseUtil.Companion.HEADER_KEY_LINK
 import kotlinx.coroutines.CoroutineScope
