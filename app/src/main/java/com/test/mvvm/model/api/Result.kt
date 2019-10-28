@@ -12,8 +12,8 @@ sealed class Result<T> {
             return Loaded()
         }
 
-        fun <T> error(exception: Exception): Result<T> {
-            return Error(exception.message ?: "unknown error")
+        fun <T> error(throwable: Throwable): Result<T> {
+            return Error(throwable.message ?: "unknown error")
         }
 
         fun <T> success(result: T): Result<T> {
