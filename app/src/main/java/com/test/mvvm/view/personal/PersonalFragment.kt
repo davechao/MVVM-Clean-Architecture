@@ -29,7 +29,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUserDetail(USER_NAME_DAVE).observe(viewLifecycleOwner, Observer {
+        viewModel.userDetailData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> progressHUD?.show()
                 is Loaded -> progressHUD?.dismiss()
@@ -48,9 +48,11 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
                     binding.viewUserDetailLoc.setData(it.result.location)
                     binding.viewUserDetailBlog.setData(it.result.blog)
                 }
-                is Error -> Timber.e("Error: ${it.errorMessage}")
+                is Error -> Timber.e("Error: $it")
             }
         })
+
+        viewModel.getUserDetail(USER_NAME_DAVE)
     }
 
     override fun getLayoutId(): Int {

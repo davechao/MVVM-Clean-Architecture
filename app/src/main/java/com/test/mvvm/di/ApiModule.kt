@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 val apiModule = module {
     single { provideAuthInterceptor(get()) }
     single { provideHttpLoggingInterceptor() }
-    single { provideOkHttpClient(get()) }
+    single { provideOkHttpClient(get(), get()) }
     single { provideApiService(get()) }
     single { provideApiRepository(get()) }
 }
@@ -34,13 +34,16 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
     return httpLoggingInterceptor
 }
 
-fun provideOkHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
+fun provideOkHttpClient(
+    authInterceptor: AuthInterceptor,
+    httpLoggingInterceptor: HttpLoggingInterceptor
+): OkHttpClient {
     return OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
         .addInterceptor(authInterceptor)
-        .addInterceptor(HttpLoggingInterceptor())
+        .addInterceptor(httpLoggingInterceptor)
         .build()
 }
 

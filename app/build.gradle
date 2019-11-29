@@ -5,14 +5,17 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
+
+    Version version = readVersion()
+
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.test.mvvm"
         minSdkVersion 26
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0.1"
+        versionCode version.versionCode.toInteger()
+        versionName version.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -71,6 +74,10 @@ android {
 
     androidExtensions {
         experimental = true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -181,4 +188,43 @@ dependencies {
     testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+}
+
+class Version {
+    def versionCode
+    def versionName
+}
+
+Version readVersion() {
+    Properties defaultVersionProps = new Properties()
+    defaultVersionProps.load(new FileInputStream(file('version.properties')))
+    def defaultBuildVersionCode = defaultVersionProps['VERSION_CODE']
+    def defaultBuildVersionName = defaultVersionProps['VERSION_NAME_PREFIX'] + "." + defaultVersionProps['VERSION_NAME_BUILD']
+
+    return new Version(versionCode: defaultBuildVersionCode, versionName: defaultBuildVersionName)
+}
+
+def increaseVersion() {
+    Properties versionProps = new Properties()
+
+    def file = file('version.properties')
+    versionProps.load(new FileInputStream(file))
+
+    def nextCode = versionProps['VERSION_CODE'].toInteger() + 1
+    versionProps['VERSION_CODE'] = nextCode.toString()
+
+    def nextBuild = versionProps['VERSION_NAME_BUILD'].toInteger() + 1
+
+    versionProps['VERSION_NAME_BUILD'] = nextBuild.toString()
+    versionProps.store(file.newWriter(), null)
+
+    def buildVersionName = versionProps['VERSION_NAME_PREFIX'] + "." + versionProps['VERSION_NAME_BUILD']
+
+    println "Increase $buildVersionName"
+}
+
+task increaseVersion {
+    doLast {
+        increaseVersion()
+    }
 }
