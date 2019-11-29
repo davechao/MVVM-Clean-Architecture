@@ -8,6 +8,5 @@ open class BaseViewModel : ViewModel(), KoinComponent {
 
     val toastData = MutableLiveData<String>()
     val dialogData = MutableLiveData<String>()
-    val navigateView = MutableLiveData<Int>()
     val isLoading = MutableLiveData<Boolean>().also { it.value = false }
 }

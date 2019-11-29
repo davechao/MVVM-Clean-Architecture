@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentHomeBinding
-import com.test.mvvm.view.adapter.UserInfoListAdapter
+import com.test.mvvm.view.home.adapter.UserInfoListAdapter
 import com.test.mvvm.view.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,9 +37,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         })
 
-        viewModel.getUsers().observe(viewLifecycleOwner, Observer {
+        viewModel.userListData.observe(viewLifecycleOwner, Observer {
             userInfoListAdapter.submitList(it)
         })
+
+        viewModel.getUsers()
     }
 
     override fun getLayoutId(): Int {

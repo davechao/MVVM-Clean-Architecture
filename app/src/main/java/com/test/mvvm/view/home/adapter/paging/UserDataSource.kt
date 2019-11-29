@@ -1,4 +1,4 @@
-package com.test.mvvm.view.adapter.paging
+package com.test.mvvm.view.home.adapter.paging
 
 import android.webkit.URLUtil
 import androidx.paging.PageKeyedDataSource
@@ -7,9 +7,11 @@ import com.test.mvvm.model.api.vo.UserItem
 import com.test.mvvm.utility.ResponseUtil
 import com.test.mvvm.utility.ResponseUtil.Companion.HEADER_KEY_LINK
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class UserDataSource constructor(
     private val viewModelScope: CoroutineScope,
@@ -22,26 +24,23 @@ class UserDataSource constructor(
         callback: LoadInitialCallback<String, UserItem>
     ) {
         viewModelScope.launch {
-            try {
+            flow {
                 pagingCallback.onLoading()
-
-                val response = withContext(Dispatchers.IO) {
-                    apiRepository.fetchUsers(0, 20)
-                }
-
-                if (response.isSuccessful) {
-                    response.body()?.run {
+                emit(apiRepository.fetchUsers(0, 20))
+            }.catch { e ->
+                pagingCallback.onThrowable(e)
+            }.onCompletion {
+                pagingCallback.onLoaded()
+            }.collect {
+                if (it.isSuccessful) {
+                    it.body()?.run {
                         val nextPageUrl =
                             ResponseUtil.INSTANCE.parseNextPageUrl(
-                                response.headers().get(HEADER_KEY_LINK).toString()
+                                it.headers().get(HEADER_KEY_LINK).toString()
                             )
                         callback.onResult(this, null, nextPageUrl)
                     }
                 }
-            } catch (e: Throwable) {
-                pagingCallback.onThrowable(e)
-            } finally {
-                pagingCallback.onLoaded()
             }
         }
     }
@@ -50,22 +49,23 @@ class UserDataSource constructor(
         val url = params.key
         if (URLUtil.isValidUrl(url)) {
             viewModelScope.launch {
-                try {
-                    val response = withContext(Dispatchers.IO) {
-                        apiRepository.fetchUsers(url)
-                    }
-
-                    if (response.isSuccessful) {
-                        response.body()?.run {
+                flow {
+                    pagingCallback.onLoading()
+                    emit(apiRepository.fetchUsers(url))
+                }.catch { e ->
+                    pagingCallback.onThrowable(e)
+                }.onCompletion {
+                    pagingCallback.onLoaded()
+                }.collect {
+                    if (it.isSuccessful) {
+                        it.body()?.run {
                             val nextUrl =
                                 ResponseUtil.INSTANCE.parseNextPageUrl(
-                                    response.headers().get(HEADER_KEY_LINK).toString()
+                                    it.headers().get(HEADER_KEY_LINK).toString()
                                 )
                             callback.onResult(this, nextUrl)
                         }
                     }
-                } catch (e: Throwable) {
-                    pagingCallback.onThrowable(e)
                 }
             }
         }

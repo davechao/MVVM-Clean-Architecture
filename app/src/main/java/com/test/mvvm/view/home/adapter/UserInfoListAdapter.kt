@@ -1,4 +1,4 @@
-package com.test.mvvm.view.adapter
+package com.test.mvvm.view.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.test.mvvm.R
 import com.test.mvvm.model.api.vo.UserItem
-import com.test.mvvm.view.adapter.viewholder.UserInfoViewHolder
+import com.test.mvvm.view.home.adapter.viewholder.UserInfoViewHolder
 
 class UserInfoListAdapter : PagedListAdapter<UserItem, UserInfoViewHolder>(diffCallback) {
 

@@ -1,4 +1,4 @@
-package com.test.mvvm.view.adapter.viewholder
+package com.test.mvvm.view.home.adapter.viewholder
 
 import android.view.View
 import android.widget.TextView

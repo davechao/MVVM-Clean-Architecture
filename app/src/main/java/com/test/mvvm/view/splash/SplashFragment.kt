@@ -25,11 +25,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.navigateView.observe(viewLifecycleOwner, Observer {
-            Navigation.findNavController(view).navigate(it)
-        })
-
-        Handler().postDelayed({ viewModel.autoLogin() }, SPLASH_TIME_OUT)
+        Handler().postDelayed({
+            Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_homeFragment)
+        }, SPLASH_TIME_OUT)
     }
 
     override fun getLayoutId(): Int {

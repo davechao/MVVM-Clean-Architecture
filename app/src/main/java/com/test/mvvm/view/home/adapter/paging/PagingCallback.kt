@@ -1,4 +1,4 @@
-package com.test.mvvm.view.adapter.paging
+package com.test.mvvm.view.home.adapter.paging
 
 interface PagingCallback {
     fun onLoading()
