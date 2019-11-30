@@ -17,7 +17,7 @@ class AuthInterceptor(private val pref: Pref) : Interceptor {
 
         val response = chain.proceed(chain.buildRequest())
 
-        Timber.d("@@: " + response.code())
+        Timber.d("Response code: ${response.code()}")
 
         return when (response.code()) {
             HttpURLConnection.HTTP_UNAUTHORIZED -> {
