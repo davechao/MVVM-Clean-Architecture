@@ -8,10 +8,14 @@ import com.test.mvvm.model.pref.Pref
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 import java.net.HttpURLConnection
 
-class AuthInterceptor(private val pref: Pref) : Interceptor {
+class AuthInterceptor(private val pref: Pref) : Interceptor, KoinComponent {
+
+    private val apiRepository: ApiRepository by inject()
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
@@ -22,6 +26,11 @@ class AuthInterceptor(private val pref: Pref) : Interceptor {
         return when (response.code()) {
             HttpURLConnection.HTTP_UNAUTHORIZED -> {
                 //TODO: do refresh token, then new token save to pref.token
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    val result = apiRepository.fetchUserDetail("davechao")
+//                    Timber.d("@@result: ${result.avatarUrl}")
+//                }
+
                 chain.proceed(chain.buildRequest())
             }
             else -> response
