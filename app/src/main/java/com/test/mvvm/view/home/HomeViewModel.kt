@@ -21,12 +21,13 @@ class HomeViewModel : BaseViewModel() {
 
     private val apiRepository: ApiRepository by inject()
 
-    var userListData = MutableLiveData<PagedList<UserItem>>()
+    private val _userListData = MutableLiveData<PagedList<UserItem>>()
+    val userListData: LiveData<PagedList<UserItem>> = _userListData
 
     fun getUsers() {
         viewModelScope.launch {
             getPagingItems().asFlow().collect {
-                userListData.value = it
+                _userListData.value = it
             }
         }
     }

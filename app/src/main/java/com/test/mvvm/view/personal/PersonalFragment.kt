@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentPersonalBinding
-import com.test.mvvm.model.api.Error
-import com.test.mvvm.model.api.Loaded
-import com.test.mvvm.model.api.Loading
-import com.test.mvvm.model.api.Success
+import com.test.mvvm.model.api.ApiResult.Loading
+import com.test.mvvm.model.api.ApiResult.Loaded
+import com.test.mvvm.model.api.ApiResult.Success
+import com.test.mvvm.model.api.ApiResult.Error
 import com.test.mvvm.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_personal.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +29,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.userDetailData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> progressHUD?.show()

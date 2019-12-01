@@ -1,10 +1,10 @@
 package com.test.mvvm.view.personal
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.test.mvvm.model.api.ApiRepository
-import com.test.mvvm.model.api.Result
+import com.test.mvvm.model.api.ApiResult
 import com.test.mvvm.model.api.vo.UserDetailItem
 import com.test.mvvm.view.base.BaseViewModel
 import kotlinx.coroutines.flow.catch
@@ -18,17 +18,18 @@ class PersonalViewModel : BaseViewModel() {
 
     private val apiRepository: ApiRepository by inject()
 
-    val userDetailData = MutableLiveData<Result<UserDetailItem>>()
+    private val _userDetailData = MutableLiveData<ApiResult<UserDetailItem>>()
+    val userDetailData: LiveData<ApiResult<UserDetailItem>> = _userDetailData
 
     fun getUserDetail(username: String) {
         viewModelScope.launch {
             flow {
-                emit(Result.loading())
-                emit(Result.success(apiRepository.fetchUserDetail(username)))
+                emit(ApiResult.loading())
+                emit(ApiResult.success(apiRepository.fetchUserDetail(username)))
             }
-                .catch { e -> emit(Result.error(e)) }
-                .onCompletion { emit(Result.loaded()) }
-                .collect { userDetailData.value = it }
+                .catch { e -> emit(ApiResult.error(e)) }
+                .onCompletion { emit(ApiResult.loaded()) }
+                .collect { _userDetailData.value = it }
         }
     }
 }
