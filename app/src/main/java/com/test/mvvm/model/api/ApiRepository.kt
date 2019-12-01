@@ -20,8 +20,12 @@ class ApiRepository(private val apiService: ApiService) {
         return apiService.fetchUsers(url)
     }
 
-    suspend fun fetchUserDetail(username: String): UserDetailItem {
+    suspend fun fetchUserDetail(username: String): Response<UserDetailItem> {
         return apiService.fetchUserDetail(username)
+    }
+
+    suspend fun testNoContentApi(): Response<Void> {
+        return apiService.testNoContentApi()
     }
 
 }

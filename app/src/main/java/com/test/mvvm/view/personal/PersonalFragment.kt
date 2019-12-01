@@ -8,6 +8,7 @@ import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentPersonalBinding
 import com.test.mvvm.model.api.ApiResult.Loading
 import com.test.mvvm.model.api.ApiResult.Loaded
+import com.test.mvvm.model.api.ApiResult.Empty
 import com.test.mvvm.model.api.ApiResult.Success
 import com.test.mvvm.model.api.ApiResult.Error
 import com.test.mvvm.view.base.BaseFragment
@@ -29,6 +30,15 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.noContentData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Loading -> progressHUD?.show()
+                is Loaded -> progressHUD?.dismiss()
+                is Empty -> Timber.d("Empty: No Content")
+                is Error -> Timber.e("Error: $it")
+            }
+        })
 
         viewModel.userDetailData.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -54,6 +64,8 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
         })
 
         viewModel.getUserDetail(USER_NAME_DAVE)
+
+//        viewModel.testNoContentApi()
     }
 
     override fun getLayoutId(): Int {

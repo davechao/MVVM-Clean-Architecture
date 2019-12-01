@@ -20,5 +20,8 @@ interface ApiService {
     suspend fun fetchUsers(@Url url: String): Response<List<UserItem>>
 
     @GET("/users/{username}")
-    suspend fun fetchUserDetail(@Path("username") username: String): UserDetailItem
+    suspend fun fetchUserDetail(@Path("username") username: String): Response<UserDetailItem>
+
+    @GET("/publicPlatforms/v1/players")
+    suspend fun testNoContentApi(): Response<Void>
 }

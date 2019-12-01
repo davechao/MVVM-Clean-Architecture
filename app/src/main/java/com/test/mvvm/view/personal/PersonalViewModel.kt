@@ -21,11 +21,28 @@ class PersonalViewModel : BaseViewModel() {
     private val _userDetailData = MutableLiveData<ApiResult<UserDetailItem>>()
     val userDetailData: LiveData<ApiResult<UserDetailItem>> = _userDetailData
 
+    private val _noContentData = MutableLiveData<ApiResult<Void?>>()
+    val noContentData: LiveData<ApiResult<Void?>> = _noContentData
+
+    fun testNoContentApi() {
+        viewModelScope.launch {
+            flow {
+                emit(ApiResult.loading())
+                emit(ApiResult.success(apiRepository.testNoContentApi().body()))
+            }
+                .catch { e -> emit(ApiResult.error(e)) }
+                .onCompletion { emit(ApiResult.loaded()) }
+                .collect {
+                    _noContentData.value = it
+                }
+        }
+    }
+
     fun getUserDetail(username: String) {
         viewModelScope.launch {
             flow {
                 emit(ApiResult.loading())
-                emit(ApiResult.success(apiRepository.fetchUserDetail(username)))
+                emit(ApiResult.success(apiRepository.fetchUserDetail(username).body()!!))
             }
                 .catch { e -> emit(ApiResult.error(e)) }
                 .onCompletion { emit(ApiResult.loaded()) }
