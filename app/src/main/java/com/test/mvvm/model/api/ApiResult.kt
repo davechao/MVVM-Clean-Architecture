@@ -14,7 +14,7 @@ sealed class ApiResult<T> {
             return Error(throwable)
         }
 
-        fun <T> success(result: T): ApiResult<T> {
+        fun <T> success(result: T?): ApiResult<T> {
             return when (result) {
                 null -> Empty()
                 else -> Success(result)

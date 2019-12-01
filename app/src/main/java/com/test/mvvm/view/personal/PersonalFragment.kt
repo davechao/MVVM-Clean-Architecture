@@ -21,7 +21,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
     private val viewModel by viewModel<PersonalViewModel>()
 
     companion object {
-        const val USER_NAME_DAVE = "davechao"
+        const val USER_NAME = "davechao"
     }
 
     override fun setViewModelToBinding(binding: FragmentPersonalBinding) {
@@ -63,7 +63,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
             }
         })
 
-        viewModel.getUserDetail(USER_NAME_DAVE)
+        viewModel.getUserDetail(USER_NAME)
 
 //        viewModel.testNoContentApi()
     }
@@ -76,5 +76,4 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding>() {
         super.onResume()
         mainViewModel?.bottomNavigationVisibility?.value = View.VISIBLE
     }
-
 }

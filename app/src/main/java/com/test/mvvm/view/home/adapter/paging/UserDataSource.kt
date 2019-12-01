@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class UserDataSource constructor(
     private val viewModelScope: CoroutineScope,
@@ -26,20 +27,20 @@ class UserDataSource constructor(
         viewModelScope.launch {
             flow {
                 pagingCallback.onLoading()
-                emit(apiRepository.fetchUsers(0, 20))
+                val result = apiRepository.fetchUsers(0, 20)
+                if (!result.isSuccessful) throw HttpException(result)
+                emit(result)
             }.catch { e ->
                 pagingCallback.onThrowable(e)
             }.onCompletion {
                 pagingCallback.onLoaded()
             }.collect {
-                if (it.isSuccessful) {
-                    it.body()?.run {
-                        val nextPageUrl =
-                            ResponseUtil.INSTANCE.parseNextPageUrl(
-                                it.headers().get(HEADER_KEY_LINK).toString()
-                            )
-                        callback.onResult(this, null, nextPageUrl)
-                    }
+                it.body()?.run {
+                    val nextPageUrl =
+                        ResponseUtil.INSTANCE.parseNextPageUrl(
+                            it.headers().get(HEADER_KEY_LINK).toString()
+                        )
+                    callback.onResult(this, null, nextPageUrl)
                 }
             }
         }
@@ -51,20 +52,20 @@ class UserDataSource constructor(
             viewModelScope.launch {
                 flow {
                     pagingCallback.onLoading()
-                    emit(apiRepository.fetchUsers(url))
+                    val result = apiRepository.fetchUsers(url)
+                    if (!result.isSuccessful) throw HttpException(result)
+                    emit(result)
                 }.catch { e ->
                     pagingCallback.onThrowable(e)
                 }.onCompletion {
                     pagingCallback.onLoaded()
                 }.collect {
-                    if (it.isSuccessful) {
-                        it.body()?.run {
-                            val nextUrl =
-                                ResponseUtil.INSTANCE.parseNextPageUrl(
-                                    it.headers().get(HEADER_KEY_LINK).toString()
-                                )
-                            callback.onResult(this, nextUrl)
-                        }
+                    it.body()?.run {
+                        val nextUrl =
+                            ResponseUtil.INSTANCE.parseNextPageUrl(
+                                it.headers().get(HEADER_KEY_LINK).toString()
+                            )
+                        callback.onResult(this, nextUrl)
                     }
                 }
             }

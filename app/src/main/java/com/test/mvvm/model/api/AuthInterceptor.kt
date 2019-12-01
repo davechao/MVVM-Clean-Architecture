@@ -27,8 +27,7 @@ class AuthInterceptor(private val pref: Pref) : Interceptor, KoinComponent {
             HttpURLConnection.HTTP_UNAUTHORIZED -> {
                 //TODO: do refresh token, then new token save to pref.token
 //                CoroutineScope(Dispatchers.IO).launch {
-//                    val result = apiRepository.fetchUserDetail("davechao")
-//                    Timber.d("@@result: ${result.avatarUrl}")
+//                    apiRepository.refreshToken()
 //                }
 
                 chain.proceed(chain.buildRequest())

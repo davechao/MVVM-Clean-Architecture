@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import org.koin.core.inject
+import retrofit2.HttpException
 
 class PersonalViewModel : BaseViewModel() {
 
@@ -21,32 +22,34 @@ class PersonalViewModel : BaseViewModel() {
     private val _userDetailData = MutableLiveData<ApiResult<UserDetailItem>>()
     val userDetailData: LiveData<ApiResult<UserDetailItem>> = _userDetailData
 
-    private val _noContentData = MutableLiveData<ApiResult<Void?>>()
-    val noContentData: LiveData<ApiResult<Void?>> = _noContentData
-
-    fun testNoContentApi() {
-        viewModelScope.launch {
-            flow {
-                emit(ApiResult.loading())
-                emit(ApiResult.success(apiRepository.testNoContentApi().body()))
-            }
-                .catch { e -> emit(ApiResult.error(e)) }
-                .onCompletion { emit(ApiResult.loaded()) }
-                .collect {
-                    _noContentData.value = it
-                }
-        }
-    }
+    private val _noContentData = MutableLiveData<ApiResult<Void>>()
+    val noContentData: LiveData<ApiResult<Void>> = _noContentData
 
     fun getUserDetail(username: String) {
         viewModelScope.launch {
             flow {
                 emit(ApiResult.loading())
-                emit(ApiResult.success(apiRepository.fetchUserDetail(username).body()!!))
+                val result = apiRepository.fetchUserDetail(username)
+                if (!result.isSuccessful) throw HttpException(result)
+                emit(ApiResult.success(result.body()))
             }
                 .catch { e -> emit(ApiResult.error(e)) }
                 .onCompletion { emit(ApiResult.loaded()) }
                 .collect { _userDetailData.value = it }
+        }
+    }
+
+    fun testNoContentApi() {
+        viewModelScope.launch {
+            flow {
+                emit(ApiResult.loading())
+                val result = apiRepository.testNoContentApi()
+                if (!result.isSuccessful) throw HttpException(result)
+                emit(ApiResult.success(result.body()))
+            }
+                .catch { e -> emit(ApiResult.error(e)) }
+                .onCompletion { emit(ApiResult.loaded()) }
+                .collect { _noContentData.value = it }
         }
     }
 }

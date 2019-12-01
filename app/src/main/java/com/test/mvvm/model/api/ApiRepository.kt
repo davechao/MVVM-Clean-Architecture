@@ -27,5 +27,4 @@ class ApiRepository(private val apiService: ApiService) {
     suspend fun testNoContentApi(): Response<Void> {
         return apiService.testNoContentApi()
     }
-
 }
