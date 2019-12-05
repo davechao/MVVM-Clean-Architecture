@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.koin.core.KoinComponent
 
-open class BaseViewModel : ViewModel(), KoinComponent {
+abstract class BaseViewModel : ViewModel(), KoinComponent {
 
     val toastData = MutableLiveData<String>()
     val dialogData = MutableLiveData<String>()

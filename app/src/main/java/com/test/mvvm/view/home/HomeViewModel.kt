@@ -27,7 +27,7 @@ class HomeViewModel : BaseViewModel() {
     fun getUsers() {
         viewModelScope.launch {
             getPagingItems().asFlow().collect {
-                _userListData.value = it
+                _userListData.postValue(it)
             }
         }
     }
@@ -43,11 +43,11 @@ class HomeViewModel : BaseViewModel() {
 
     private val callback = object : PagingCallback {
         override fun onLoading() {
-            isLoading.value = true
+            isLoading.postValue(true)
         }
 
         override fun onLoaded() {
-            isLoading.value = false
+            isLoading.postValue(false)
         }
 
         override fun onTotalCount(count: Int) {

@@ -7,6 +7,7 @@ import com.test.mvvm.model.api.ApiRepository
 import com.test.mvvm.model.api.ApiResult
 import com.test.mvvm.model.api.vo.UserDetailItem
 import com.test.mvvm.view.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.inject
@@ -29,6 +30,7 @@ class PersonalViewModel : BaseViewModel() {
                 if (!result.isSuccessful) throw HttpException(result)
                 emit(ApiResult.success(result.body()))
             }
+                .flowOn(Dispatchers.IO)
                 .onStart { emit(ApiResult.loading()) }
                 .catch { e -> emit(ApiResult.error(e)) }
                 .onCompletion { emit(ApiResult.loaded()) }
@@ -44,6 +46,7 @@ class PersonalViewModel : BaseViewModel() {
                 if (!result.isSuccessful) throw HttpException(result)
                 emit(ApiResult.success(result.body()))
             }
+                .flowOn(Dispatchers.IO)
                 .onStart { emit(ApiResult.loading()) }
                 .catch { e -> emit(ApiResult.error(e)) }
                 .onCompletion { emit(ApiResult.loaded()) }

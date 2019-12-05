@@ -7,10 +7,8 @@ import com.test.mvvm.model.api.vo.UserItem
 import com.test.mvvm.utility.ResponseUtil
 import com.test.mvvm.utility.ResponseUtil.Companion.HEADER_KEY_LINK
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -30,19 +28,23 @@ class UserDataSource constructor(
                 val result = apiRepository.fetchUsers(0, 20)
                 if (!result.isSuccessful) throw HttpException(result)
                 emit(result)
-            }.catch { e ->
-                pagingCallback.onThrowable(e)
-            }.onCompletion {
-                pagingCallback.onLoaded()
-            }.collect {
-                it.body()?.run {
-                    val nextPageUrl =
-                        ResponseUtil.INSTANCE.parseNextPageUrl(
-                            it.headers().get(HEADER_KEY_LINK).toString()
-                        )
-                    callback.onResult(this, null, nextPageUrl)
-                }
             }
+                .flowOn(Dispatchers.IO)
+                .catch { e ->
+                    pagingCallback.onThrowable(e)
+                }.onCompletion {
+                    pagingCallback.onLoaded()
+                }.collect {
+                    if (it.isSuccessful) {
+                        it.body()?.run {
+                            val nextPageUrl =
+                                ResponseUtil.INSTANCE.parseNextPageUrl(
+                                    it.headers().get(HEADER_KEY_LINK).toString()
+                                )
+                            callback.onResult(this, null, nextPageUrl)
+                        }
+                    }
+                }
         }
     }
 
@@ -55,19 +57,23 @@ class UserDataSource constructor(
                     val result = apiRepository.fetchUsers(url)
                     if (!result.isSuccessful) throw HttpException(result)
                     emit(result)
-                }.catch { e ->
-                    pagingCallback.onThrowable(e)
-                }.onCompletion {
-                    pagingCallback.onLoaded()
-                }.collect {
-                    it.body()?.run {
-                        val nextUrl =
-                            ResponseUtil.INSTANCE.parseNextPageUrl(
-                                it.headers().get(HEADER_KEY_LINK).toString()
-                            )
-                        callback.onResult(this, nextUrl)
-                    }
                 }
+                    .flowOn(Dispatchers.IO)
+                    .catch { e ->
+                        pagingCallback.onThrowable(e)
+                    }.onCompletion {
+                        pagingCallback.onLoaded()
+                    }.collect {
+                        if (it.isSuccessful) {
+                            it.body()?.run {
+                                val nextUrl =
+                                    ResponseUtil.INSTANCE.parseNextPageUrl(
+                                        it.headers().get(HEADER_KEY_LINK).toString()
+                                    )
+                                callback.onResult(this, nextUrl)
+                            }
+                        }
+                    }
             }
         }
     }
