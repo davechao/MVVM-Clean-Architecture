@@ -6,11 +6,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.test.mvvm.R
 import com.test.mvvm.databinding.FragmentPersonalBinding
-import com.test.mvvm.model.api.ApiResult.Loading
-import com.test.mvvm.model.api.ApiResult.Loaded
-import com.test.mvvm.model.api.ApiResult.Empty
-import com.test.mvvm.model.api.ApiResult.Success
-import com.test.mvvm.model.api.ApiResult.Error
+import com.test.mvvm.model.api.ApiResult.*
 import com.test.mvvm.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_personal.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
