@@ -7,10 +7,7 @@ import com.test.mvvm.model.api.ApiRepository
 import com.test.mvvm.model.api.ApiResult
 import com.test.mvvm.model.api.vo.UserDetailItem
 import com.test.mvvm.view.base.BaseViewModel
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.inject
 import retrofit2.HttpException
@@ -28,11 +25,11 @@ class PersonalViewModel : BaseViewModel() {
     fun getUserDetail(username: String) {
         viewModelScope.launch {
             flow {
-                emit(ApiResult.loading())
                 val result = apiRepository.fetchUserDetail(username)
                 if (!result.isSuccessful) throw HttpException(result)
                 emit(ApiResult.success(result.body()))
             }
+                .onStart { emit(ApiResult.loading()) }
                 .catch { e -> emit(ApiResult.error(e)) }
                 .onCompletion { emit(ApiResult.loaded()) }
                 .collect { _userDetailData.value = it }
@@ -47,6 +44,7 @@ class PersonalViewModel : BaseViewModel() {
                 if (!result.isSuccessful) throw HttpException(result)
                 emit(ApiResult.success(result.body()))
             }
+                .onStart { emit(ApiResult.loading()) }
                 .catch { e -> emit(ApiResult.error(e)) }
                 .onCompletion { emit(ApiResult.loaded()) }
                 .collect { _noContentData.value = it }
